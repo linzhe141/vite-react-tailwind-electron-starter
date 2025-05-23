@@ -40,6 +40,7 @@ export type ApiInvoker = {
 export function createApiInvoker() {
   const apiInvoker = {} as ApiInvoker
   Object.entries(defaultEvents).forEach(([name, event]) => {
+    // @ts-expect-error ignore
     apiInvoker[name] = event.invoker
   })
   return apiInvoker
