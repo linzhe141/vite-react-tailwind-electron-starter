@@ -1,9 +1,6 @@
 import { contextBridge, ipcRenderer } from 'electron'
+import { createApiInvoker } from './ipcEvent'
+import { setIpcRenderer } from './context'
 
-const api = {
-  foo: (command: string, args: string[]) =>
-    ipcRenderer.invoke('foo', command, args),
-}
-contextBridge.exposeInMainWorld('electronAPI', api)
-
-export type ElectronAPI = typeof api
+setIpcRenderer(ipcRenderer)
+contextBridge.exposeInMainWorld('apiInvoker', createApiInvoker())

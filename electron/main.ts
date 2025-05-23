@@ -1,6 +1,9 @@
-import { app, BrowserWindow, ipcMain } from 'electron'
+import { app, BrowserWindow } from 'electron'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { createIpcHandler } from './ipcEvent'
+import { store } from './store'
+import { setStore } from './context'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -21,9 +24,6 @@ app.whenReady().then(() => {
     // Load your file
     win.loadFile('dist/index.html')
   }
-
-  ipcMain.handle('foo', (event, arg) => {
-    console.log('xxxxxxxxxx', event, arg)
-    return 'zzzzzzzzzzzzzzzzzz'
-  })
+  setStore(store)
+  createIpcHandler()
 })

@@ -1,7 +1,6 @@
-import { ElectronAPI } from '../electron/preload'
-
+import type { ApiInvoker } from '../electron/ipcEvent'
 declare global {
   interface Window {
-    electronAPI: ElectronAPI
+    apiInvoker: ApiInvoker
   }
 }
