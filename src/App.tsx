@@ -1,38 +1,28 @@
-import { use, useState } from 'react'
+import { useTheme } from './hooks/useTheme'
+import { Sun, Moon } from 'lucide-react'
 
-function App({ initTheme }: { initTheme: Promise<string> }) {
-  const [theme, setTheme] = useState(use(initTheme))
+function App() {
+  const { setTheme } = useTheme()
   return (
-    <div>
-      {theme === 'light' ? (
-        <div
-          v-if='theme === "light"'
-          className='bg-red-100'
-          onClick={async () => {
-            const apiInvoker = window.apiInvoker
-            const x = await apiInvoker.foo('zzz')
-            console.log(x)
-
-            setTheme('dark')
-            apiInvoker.setTheme('dark')
-          }}
+    <div className='flex h-screen w-screen items-center justify-center'>
+      <div className='flex flex-col items-center justify-center gap-y-4'>
+        <h1 className='text-5xl dark:text-white'>
+          vite react tailwind electron starter
+        </h1>
+        <div className='dark:text-white'>change theme</div>
+        <button
+          className='transition-transform hover:rotate-45 dark:hidden'
+          onClick={() => setTheme('dark')}
         >
-          dark mode
-        </div>
-      ) : (
-        <div
-          className='bg-red-100'
-          onClick={async () => {
-            const apiInvoker = window.apiInvoker
-            const x = await apiInvoker.foo('zzz')
-            console.log(x)
-            setTheme('light')
-            apiInvoker.setTheme('light')
-          }}
+          <Sun />
+        </button>
+        <button
+          className='hidden text-white transition-transform hover:rotate-[30deg] dark:block'
+          onClick={() => setTheme('light')}
         >
-          light mode
-        </div>
-      )}
+          <Moon />
+        </button>
+      </div>
     </div>
   )
 }
