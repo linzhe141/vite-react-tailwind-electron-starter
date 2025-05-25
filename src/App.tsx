@@ -14,13 +14,13 @@ function App() {
           className='transition-transform hover:rotate-45 dark:hidden'
           onClick={() => setTheme('dark')}
         >
-          <Sun />
+          <Sun className='size-28 text-yellow-400 drop-shadow-[0_0_8px_rgba(253,224,71,0.7)] transition-colors' />
         </button>
         <button
-          className='hidden text-white transition-transform hover:rotate-[30deg] dark:block'
+          className='hidden transition-transform hover:rotate-[30deg] dark:block'
           onClick={() => setTheme('light')}
         >
-          <Moon />
+          <Moon className='size-28 text-blue-400 drop-shadow-[0_0_8px_rgba(59,130,246,0.7)] transition-colors' />
         </button>
       </div>
     </div>

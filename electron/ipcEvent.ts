@@ -1,52 +1,44 @@
-import { ipcMain } from 'electron'
-
 import { getContext } from './context'
 const defaultEvents = {
-  foo: {
-    handler: (data: string) => {
-      return data + ' world'
-    },
-    invoker: (data: string) => {
-      const { ipcRenderer } = getContext()
-      return ipcRenderer.invoke('foo', data)
-    },
-  },
-  getTheme: {
+  getElectronStore: {
     handler: () => {
       const { store } = getContext()
-      return store.get('theme') ?? 'light'
+      return store.store
     },
     invoker: () => {
       const { ipcRenderer } = getContext()
-      return ipcRenderer.invoke('getTheme')
+      return ipcRenderer.invoke('getElectronStore')
     },
   },
-  setTheme: {
-    handler: (data: string) => {
+  dispatchElectronStore: {
+    handler: (data: Record<string, unknown>) => {
       const { store } = getContext()
-      store.set('theme', data)
+      Object.entries(data).forEach(([key, newValue]) => {
+        store.set(key, newValue)
+      })
     },
-    invoker: (data: string) => {
+    invoker: (data: Record<string, unknown>) => {
       const { ipcRenderer } = getContext()
-      return ipcRenderer.invoke('setTheme', data)
+      return ipcRenderer.invoke('dispatchElectronStore', data)
     },
   },
 } as const
 
-export type ApiInvoker = {
+export type ApiRendererInvoker = {
   [K in keyof typeof defaultEvents]: (typeof defaultEvents)[K]['invoker']
 }
 
-export function createApiInvoker() {
-  const apiInvoker = {} as ApiInvoker
+export function createApiRendererInvoker() {
+  const apiRendererInvoker = {} as ApiRendererInvoker
   Object.entries(defaultEvents).forEach(([name, event]) => {
     // @ts-expect-error ignore this line
-    apiInvoker[name] = event.invoker
+    apiRendererInvoker[name] = event.invoker
   })
-  return apiInvoker
+  return apiRendererInvoker
 }
 
 export function createIpcHandler() {
+  const { ipcMain } = getContext()
   Object.entries(defaultEvents).forEach(([name, event]) => {
     ipcMain.handle(name, (_e, data) => {
       return event.handler(data)

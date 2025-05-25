@@ -1,9 +1,9 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createIpcHandler } from './ipcEvent'
 import { store } from './store'
-import { setStore } from './context'
+import { setIpcMain, setStore } from './context'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -33,6 +33,11 @@ app.whenReady().then(() => {
   }
   // 移除窗口边框
   win.setMenuBarVisibility(false)
+  win.webContents.on('did-finish-load', () => {
+    win.webContents.setZoomFactor(1)
+    win.webContents.setVisualZoomLevelLimits(1, 1)
+  })
   setStore(store)
+  setIpcMain(ipcMain)
   createIpcHandler()
 })

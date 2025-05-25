@@ -1,6 +1,6 @@
-import type { ApiInvoker } from '../electron/ipcEvent'
+import type { ApiRendererInvoker } from '../electron/ipcEvent'
 declare global {
   interface Window {
-    apiInvoker: ApiInvoker
+    apiRendererInvoker: ApiRendererInvoker
   }
 }
