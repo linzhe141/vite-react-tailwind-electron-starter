@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import type { StoreApi, UseBoundStore } from 'zustand'
 import { forwardToElectronStore } from './forwardToElectronStore'
-import type { Theme } from '../types'
+import type { Theme } from '../../types'
 
 type State = {
   theme: Theme

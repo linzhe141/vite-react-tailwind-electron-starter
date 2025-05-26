@@ -2,8 +2,8 @@ import { app, BrowserWindow, ipcMain } from 'electron'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createIpcHandler } from './ipcEvent'
-import { store } from './store'
-import { setIpcMain, setStore } from './context'
+import { settingsStore } from './settingsStore'
+import { setIpcMain, setSettingsStore } from './context'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -37,7 +37,7 @@ app.whenReady().then(() => {
     win.webContents.setZoomFactor(1)
     win.webContents.setVisualZoomLevelLimits(1, 1)
   })
-  setStore(store)
+  setSettingsStore(settingsStore)
   setIpcMain(ipcMain)
   createIpcHandler()
 })

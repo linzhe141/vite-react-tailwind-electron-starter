@@ -2,8 +2,8 @@ import { getContext } from './context'
 const defaultEvents = {
   getElectronStore: {
     handler: () => {
-      const { store } = getContext()
-      return store.store
+      const { settingsStore } = getContext()
+      return settingsStore.store
     },
     invoker: () => {
       const { ipcRenderer } = getContext()
@@ -12,9 +12,9 @@ const defaultEvents = {
   },
   dispatchElectronStore: {
     handler: (data: Record<string, unknown>) => {
-      const { store } = getContext()
+      const { settingsStore } = getContext()
       Object.entries(data).forEach(([key, newValue]) => {
-        store.set(key, newValue)
+        settingsStore.set(key, newValue)
       })
     },
     invoker: (data: Record<string, unknown>) => {

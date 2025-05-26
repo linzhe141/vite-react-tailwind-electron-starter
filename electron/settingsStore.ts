@@ -2,7 +2,7 @@ import Store from 'electron-store'
 export type Settings = {
   theme: 'dark' | 'light'
 }
-export const store = new Store<Settings>({
+export const settingsStore = new Store<Settings>({
   defaults: {
     theme: 'dark',
   },
@@ -10,4 +10,4 @@ export const store = new Store<Settings>({
   fileExtension: 'json',
 })
 
-export type StoreType = typeof store
+export type SettingsStoreType = typeof settingsStore
