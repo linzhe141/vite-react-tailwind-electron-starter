@@ -1,13 +1,14 @@
 import { create } from 'zustand'
 import type { StoreApi, UseBoundStore } from 'zustand'
 import { forwardToElectronStore } from './forwardToElectronStore'
+import type { Theme } from '../types'
 
 type State = {
-  theme: 'dark' | 'light'
+  theme: Theme
 }
 
 type Actions = {
-  setTheme: (theme: 'dark' | 'light') => void
+  setTheme: (theme: Theme) => void
 }
 
 export let useElectronStore: UseBoundStore<StoreApi<State & Actions>> = null!
@@ -16,7 +17,7 @@ export async function createElectronStore() {
   useElectronStore = create<State & Actions>()(
     forwardToElectronStore((set) => ({
       ...initState,
-      setTheme: (theme: 'dark' | 'light') => {
+      setTheme: (theme) => {
         set({ theme })
       },
     }))
