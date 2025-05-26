@@ -14,7 +14,7 @@ type Actions = {
 export let useElectronStore: UseBoundStore<StoreApi<State & Actions>> = null!
 export async function createElectronStore() {
   const initState = await window.apiRendererInvoker.getElectronStore()
-  useElectronStore = create<State & Actions>()(
+  useElectronStore = create<State & Actions>(
     forwardToElectronStore((set) => ({
       ...initState,
       setTheme: (theme) => {
