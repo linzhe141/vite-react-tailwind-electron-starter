@@ -1,8 +1,7 @@
 import type { StateCreator } from 'zustand'
 
 type ForwardToElectronStore = <T>(
-  f: StateCreator<T, [], []>,
-  name?: string
+  f: StateCreator<T, [], []>
 ) => StateCreator<T, [], []>
 
 export const forwardToElectronStore: ForwardToElectronStore =

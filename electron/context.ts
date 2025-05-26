@@ -1,11 +1,11 @@
-import type ElectronStore from 'electron-store'
 import type { IpcRenderer, IpcMain } from 'electron'
-let _store: ElectronStore = null!
+import type { StoreType } from './store'
+let _store: StoreType = null!
 let _ipcMain: IpcMain = null!
 let _ipcRenderer: IpcRenderer = null!
 
 interface Context {
-  store: ElectronStore
+  store: StoreType
   ipcMain: IpcMain
   ipcRenderer: IpcRenderer
 }
@@ -17,7 +17,7 @@ export function getContext() {
   } satisfies Context
 }
 
-export function setStore(store: ElectronStore) {
+export function setStore(store: StoreType) {
   _store = store
 }
 
