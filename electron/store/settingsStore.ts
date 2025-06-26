@@ -3,16 +3,10 @@ import ElectronStore from 'electron-store'
 const Store = ElectronStore.default as typeof ElectronStore
 export type Settings = {
   theme: 'dark' | 'light'
-  apiKey: string
-  baseUrl: string
-  endPoint: string
 }
 export const settingsStore = new Store<Settings>({
   defaults: {
     theme: 'dark',
-    apiKey: '',
-    baseUrl: '',
-    endPoint: '',
   },
   name: 'settings',
   fileExtension: 'json',
