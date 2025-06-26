@@ -25,3 +25,5 @@ dist-ssr
 
 
 dist-electron
+sqlite.db
+out

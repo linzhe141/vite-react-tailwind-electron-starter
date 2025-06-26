@@ -2,15 +2,14 @@
   "name": "vite-react-tailwind-electron-starter",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "main": "dist-electron/main.js",
   "scripts": {
+    "rebuild:electron": "npx electron-rebuild",
     "start": "electron .",
-    "dev": "vite",
+    "dev": "rm -rf dist-electron && chcp 65001 && vite",
     "format": "prettier --write .",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "build": "rm -rf dist-electron && tsc -b && vite build",
+    "lint": "eslint ."
   },
   "dependencies": {
     "electron": "^36.3.1",
@@ -21,6 +20,7 @@
     "zustand": "^5.0.5"
   },
   "devDependencies": {
+    "@electron/rebuild": "^4.0.1",
     "@eslint/js": "^9.25.0",
     "@tailwindcss/vite": "^4.1.7",
     "@types/react": "^19.1.2",

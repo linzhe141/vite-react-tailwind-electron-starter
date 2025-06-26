@@ -1,9 +1,4 @@
-import { contextBridge, ipcRenderer } from 'electron'
-import { createApiRendererInvoker } from './ipcEvent'
-import { setIpcRenderer } from './context'
+import { contextBridge } from 'electron'
+import { apiRendererInvoker } from './ipc/preload'
 
-setIpcRenderer(ipcRenderer)
-contextBridge.exposeInMainWorld(
-  'apiRendererInvoker',
-  createApiRendererInvoker()
-)
+contextBridge.exposeInMainWorld('apiRendererInvoker', apiRendererInvoker)
