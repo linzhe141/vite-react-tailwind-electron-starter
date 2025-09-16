@@ -66,8 +66,8 @@ export default defineConfig({
             sourcemap: true,
             lib: {
               entry: 'electron/preload.ts',
-              formats: ['cjs'],
-              fileName: 'preload',
+              formats: ['es'],
+              fileName: () => `preload.mjs`,
             },
             rollupOptions: {
               external: Object.keys(pkg.dependencies),

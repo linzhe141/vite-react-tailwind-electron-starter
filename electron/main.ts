@@ -17,9 +17,10 @@ function createRootWindow() {
     minWidth,
     minHeight,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.cjs'),
+      preload: path.join(__dirname, 'preload.mjs'),
       nodeIntegration: false,
       contextIsolation: true,
+      sandbox: false,
     },
   })
 }
