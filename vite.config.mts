@@ -40,7 +40,7 @@ export default defineConfig({
             sourcemap: true,
             lib: {
               entry: 'electron/main.ts',
-              formats: ['cjs'],
+              formats: ['es'],
               fileName: 'main',
             },
             rollupOptions: {

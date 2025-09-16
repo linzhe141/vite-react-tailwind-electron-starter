@@ -1,0 +1,23 @@
+{
+  "appId": "com.example.viteelectronapp",
+  "productName": "Vite React Tailwind Electron Starter",
+  "directories": {
+    "buildResources": "build",
+    "output": "dist-electron-builder"
+  },
+  "files": ["dist-electron/**/*", "dist/**/*"],
+  "win": {
+    "target": "nsis"
+  },
+  "nsis": {
+    "oneClick": false,
+    "perMachine": true,
+    "allowToChangeInstallationDirectory": true
+  },
+  "mac": {  
+    "target": "dmg"
+  },
+  "linux": {
+    "target": "AppImage"
+  }
+}

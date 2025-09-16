@@ -25,5 +25,6 @@ dist-ssr
 
 
 dist-electron
+dist-electron-builder
 sqlite.db
 out

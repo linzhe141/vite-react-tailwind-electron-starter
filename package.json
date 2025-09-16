@@ -1,6 +1,7 @@
 {
   "name": "vite-react-tailwind-electron-starter",
   "private": true,
+  "type": "module",
   "version": "0.0.0",
   "main": "dist-electron/main.js",
   "scripts": {
@@ -8,11 +9,11 @@
     "start": "electron .",
     "dev": "rm -rf dist-electron && chcp 65001 && vite",
     "format": "prettier --write .",
-    "build": "rm -rf dist-electron && tsc -b && vite build",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "build:dist": "cross-env NODE_ENV=production electron-builder --config electron-builder.json",
+    "build": "rm -rf dist-electron && tsc -b && vite build && pnpm build:dist"
   },
   "dependencies": {
-    "electron": "^36.3.1",
     "electron-store": "^10.0.1",
     "lucide-react": "^0.511.0",
     "react": "^19.1.0",
@@ -26,6 +27,9 @@
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react": "^4.4.1",
+    "cross-env": "^10.0.0",
+    "electron": "^36.3.1",
+    "electron-builder": "^26.0.12",
     "eslint": "^9.25.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
