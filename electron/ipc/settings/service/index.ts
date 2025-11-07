@@ -1,12 +1,9 @@
-import { getContext } from '@/electron/context'
-
+import { settingsStore } from '@/electron/store/settingsStore'
 export function getStore() {
-  const { settingsStore } = getContext()
   return settingsStore.store
 }
 
 export function dispatchStore(data: Record<string, unknown>) {
-  const { settingsStore } = getContext()
   Object.entries(data).forEach(([key, newValue]) => {
     settingsStore.set(key, newValue)
   })

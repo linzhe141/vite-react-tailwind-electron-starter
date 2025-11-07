@@ -1,4 +1,4 @@
 import { contextBridge } from 'electron'
-import { apiRendererInvoker } from './ipc/preload'
+import { apiRendererInvoker } from './ipc'
 
 contextBridge.exposeInMainWorld('apiRendererInvoker', apiRendererInvoker)

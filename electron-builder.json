@@ -3,9 +3,9 @@
   "productName": "Vite React Tailwind Electron Starter",
   "directories": {
     "buildResources": "build",
-    "output": "dist-electron-builder"
+    "output": "dist/electron-builder"
   },
-  "files": ["dist-electron/**/*", "dist/**/*"],
+  "files": ["dist/electron/**/*", "dist/app/**/*"],
   "win": {
     "target": "nsis"
   },
@@ -14,7 +14,7 @@
     "perMachine": true,
     "allowToChangeInstallationDirectory": true
   },
-  "mac": {  
+  "mac": {
     "target": "dmg"
   },
   "linux": {

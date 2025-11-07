@@ -1,6 +1,6 @@
 import { ipcMain } from 'electron'
 import type { Channel, SETTING_CHANNELS } from './channels'
-import { dispatchStore, getStore } from '../service'
+import { dispatchStore, getStore } from './service'
 
 type Handler<T extends Channel> = SETTING_CHANNELS[T]
 

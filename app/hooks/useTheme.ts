@@ -1,9 +1,8 @@
 import { useElectronSettingStore } from '../store/electronSettingStore'
-import type { Theme } from '../../types'
+import type { Theme } from '@/types'
 
 export function useTheme() {
-  const theme = useElectronSettingStore((state) => state.theme)
-  const setTheme = useElectronSettingStore((state) => state.setTheme)
+  const { theme, setTheme } = useElectronSettingStore()
   function setThemeHandler(newTheme: Theme) {
     setTheme(newTheme)
     if (newTheme === 'dark') {

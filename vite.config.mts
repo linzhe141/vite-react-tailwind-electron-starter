@@ -15,6 +15,7 @@ const commonjsTarget = 'node18'
 export default defineConfig({
   build: {
     target: 'esnext',
+    outDir: 'dist/app',
     rollupOptions: {
       ...manualChunksConfig,
     },
@@ -38,6 +39,7 @@ export default defineConfig({
           build: {
             target: commonjsTarget,
             sourcemap: true,
+            outDir: 'dist/electron',
             lib: {
               entry: 'electron/main.ts',
               formats: ['es'],
@@ -64,6 +66,7 @@ export default defineConfig({
           build: {
             target: commonjsTarget,
             sourcemap: true,
+            outDir: 'dist/electron',
             lib: {
               entry: 'electron/preload.ts',
               formats: ['es'],
