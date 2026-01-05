@@ -3,16 +3,21 @@
   "private": true,
   "type": "module",
   "version": "0.0.0",
-  "main": "dist/electron/main.js",
+  "main": "./dist/electron/main/index.js",
+  "author": "linzhe141@qq.com",
+  "license": "ISC",
+  "description": "A sleek starter electron template",
+  "packageManager": "pnpm@10.5.1",
   "scripts": {
+    "start": "electron-vite preview",
+    "dev": "electron-vite dev",
+    "prebuild": "electron-vite build",
     "rebuild:electron": "npx electron-rebuild",
-    "start": "electron .",
-    "dev": "rm -rf dist/electron && chcp 65001 && vite",
+    "clean": "rm -rf dist",
     "format": "prettier --write .",
     "lint": "eslint .",
-    "remove:build-resource": "rm -rf dist/electron && rm -rf dist/app",
-    "pack:electron": "cross-env NODE_ENV=production electron-builder --config electron-builder.json",
-    "build": "pnpm remove:build-resource  && tsc -b && vite build && pnpm pack:electron"
+    "pack:electron": "cross-env NODE_ENV=production electron-builder --config electron-builder.config.ts",
+    "build": "pnpm clean && pnpm prebuild && pnpm pack:electron"
   },
   "dependencies": {
     "electron-store": "^10.0.1",
@@ -29,8 +34,9 @@
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react": "^4.4.1",
     "cross-env": "^10.0.0",
-    "electron": "^36.3.1",
+    "electron": "38.2.2",
     "electron-builder": "^26.0.12",
+    "electron-vite": "^5.0.0",
     "eslint": "^9.25.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
@@ -40,8 +46,7 @@
     "tailwindcss": "^4.1.7",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.30.1",
-    "vite": "^6.3.5",
-    "vite-plugin-electron": "^0.29.0"
+    "vite": "^7.2.7"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
