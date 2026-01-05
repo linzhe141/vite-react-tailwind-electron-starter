@@ -11,7 +11,7 @@ export const ipcMainApi = {
   ) {
     const windows = BrowserWindow.getAllWindows()
     for (const w of windows) {
-      if (data.length) {
+      if (data?.length) {
         w.webContents.send(ch, data[0])
       } else {
         w.webContents.send(ch)
