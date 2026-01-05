@@ -11,7 +11,12 @@ export function setupIpcMainHandle() {
       settingsStore.set(key, newValue)
     })
 
-    ipcMainApi.send('sendChunk', 'foo~')
+    ipcMainApi.send('sendChunk', 'chunk~')
     ipcMainApi.send('ping')
+    type FooChannelParams = Parameters<typeof ipcMainApi.send<'foo'>>[1]
+    const params: FooChannelParams = {
+      foo: 'bar',
+    }
+    ipcMainApi.send('foo', params)
   })
 }

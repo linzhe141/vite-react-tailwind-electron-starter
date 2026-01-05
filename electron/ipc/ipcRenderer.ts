@@ -1,21 +1,19 @@
 import { ipcRenderer, type IpcRendererEvent } from 'electron'
-import type { MainMessage, RenderMessage } from './channels'
+import type { MainChannel, RenderChannel } from './channels'
 
 export const ipcRendererApi = {
-  invoke<T extends keyof RenderMessage>(
+  invoke<T extends keyof RenderChannel>(
     ch: T,
-    ...data: Parameters<RenderMessage[T]>
+    ...data: Parameters<RenderChannel[T]>
   ) {
-    return ipcRenderer.invoke(ch, ...data)
+    return ipcRenderer.invoke(ch, ...data) as Promise<
+      Awaited<ReturnType<RenderChannel[T]>>
+    >
   },
-  on<T extends keyof MainMessage>(ch: T, handler: MainMessage[T]) {
+  on<T extends keyof MainChannel>(ch: T, handler: MainChannel[T]) {
     // @ts-expect-error ignore
     const fn = (_e: IpcRendererEvent, data) => {
-      if (data?.length) {
-        handler(data[0])
-      } else {
-        handler(data)
-      }
+      handler(data)
     }
     ipcRenderer.addListener(ch, fn)
     return () => {

@@ -14,6 +14,12 @@ function App() {
       console.log('ping')
     })
   }, [])
+  useEffect(() => {
+    return window.ipcRendererApi.on('foo', (data) => {
+      console.log('foo', data)
+    })
+  }, [])
+
   return (
     <div className='flex h-screen w-screen items-center justify-center'>
       <div className='flex flex-col items-center justify-center gap-y-4'>
@@ -28,7 +34,7 @@ function App() {
           <Sun className='size-28 text-yellow-400 drop-shadow-[0_0_8px_rgba(253,224,71,0.7)] transition-colors' />
         </button>
         <button
-          className='hidden transition-transform hover:rotate-[30deg] dark:block'
+          className='hidden transition-transform hover:rotate-30 dark:block'
           onClick={() => setTheme('light')}
         >
           <Moon className='size-28 text-blue-400 drop-shadow-[0_0_8px_rgba(59,130,246,0.7)] transition-colors' />

@@ -1,21 +1,17 @@
 import { BrowserWindow, ipcMain } from 'electron'
-import type { MainMessage, RenderMessage } from './channels'
+import type { MainChannel, RenderChannel } from './channels'
 
 export const ipcMainApi = {
-  handle<T extends keyof RenderMessage>(ch: T, fn: RenderMessage[T]) {
+  handle<T extends keyof RenderChannel>(ch: T, fn: RenderChannel[T]) {
     ipcMain.handle(ch, (_e, data) => fn(data))
   },
-  send<T extends keyof MainMessage>(
+  send<T extends keyof MainChannel>(
     ch: T,
-    ...data: Parameters<MainMessage[T]>
+    ...data: Parameters<MainChannel[T]>
   ) {
     const windows = BrowserWindow.getAllWindows()
     for (const w of windows) {
-      if (data?.length) {
-        w.webContents.send(ch, data[0])
-      } else {
-        w.webContents.send(ch)
-      }
+      w.webContents.send(ch, ...data)
     }
   },
 }
