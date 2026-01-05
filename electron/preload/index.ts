@@ -1,8 +1,8 @@
 import { contextBridge } from 'electron'
-import { apiRendererInvoker } from '../ipc/api'
+import { ipcRendererApi } from '../ipc/ipcRenderer'
 
 if (process.contextIsolated) {
-  contextBridge.exposeInMainWorld('apiRendererInvoker', apiRendererInvoker)
+  contextBridge.exposeInMainWorld('ipcRendererApi', ipcRendererApi)
 } else {
-  window.apiRendererInvoker = apiRendererInvoker
+  window.ipcRendererApi = ipcRendererApi
 }

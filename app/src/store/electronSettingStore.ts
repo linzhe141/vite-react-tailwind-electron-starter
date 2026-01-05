@@ -14,7 +14,7 @@ type Actions = {
 export let useElectronSettingStore: UseBoundStore<StoreApi<State & Actions>> =
   null!
 export async function createElectronSettingStore() {
-  const initState = await window.apiRendererInvoker.setting.getElectronStore()
+  const initState = await window.ipcRendererApi.invoke('getStore')
   useElectronSettingStore = create<State & Actions>(
     forwardToElectronStore(
       (set) => ({
@@ -23,7 +23,7 @@ export async function createElectronSettingStore() {
           set({ theme })
         },
       }),
-      window.apiRendererInvoker.setting.dispatchElectronStore
+      (data: any) => window.ipcRendererApi.invoke('dispatchStore', data)
     )
   )
 }

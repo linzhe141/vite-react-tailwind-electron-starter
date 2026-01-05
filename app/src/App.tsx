@@ -1,8 +1,19 @@
+import { useEffect } from 'react'
 import { useTheme } from './hooks/useTheme'
 import { Sun, Moon } from 'lucide-react'
 
 function App() {
   const { setTheme } = useTheme()
+  useEffect(() => {
+    return window.ipcRendererApi.on('sendChunk', (a) => {
+      console.log('sendChunk', a)
+    })
+  }, [])
+  useEffect(() => {
+    return window.ipcRendererApi.on('ping', () => {
+      console.log('ping')
+    })
+  }, [])
   return (
     <div className='flex h-screen w-screen items-center justify-center'>
       <div className='flex flex-col items-center justify-center gap-y-4'>

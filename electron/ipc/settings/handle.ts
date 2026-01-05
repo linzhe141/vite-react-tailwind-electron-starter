@@ -1,27 +1,17 @@
-import { ipcMain } from 'electron'
-import type { Channel, SETTING_CHANNELS } from './channels'
-import { dispatchStore, getStore } from './service'
+import { settingsStore } from '@/electron/store/settingsStore'
+import { ipcMainApi } from '../ipcMain'
 
-type Handler<T extends Channel> = SETTING_CHANNELS[T]
+export function setupIpcMainHandle() {
+  ipcMainApi.handle('getStore', () => {
+    return settingsStore.store
+  })
 
-export function setupIpcHandle() {
-  {
-    const ch: Channel = 'setting:GET_STORE'
-    const handle: Handler<typeof ch> = () => {
-      return getStore()
-    }
-    ipcMain.handle(ch, (_event) => {
-      return handle()
+  ipcMainApi.handle('dispatchStore', (data) => {
+    Object.entries(data).forEach(([key, newValue]) => {
+      settingsStore.set(key, newValue)
     })
-  }
 
-  {
-    const ch: Channel = 'setting:DISPATCH_STORE'
-    const handle: Handler<typeof ch> = (data) => {
-      dispatchStore(data)
-    }
-    ipcMain.handle(ch, (_event, data) => {
-      return handle(data)
-    })
-  }
+    ipcMainApi.send('sendChunk', 'foo~')
+    ipcMainApi.send('ping')
+  })
 }
